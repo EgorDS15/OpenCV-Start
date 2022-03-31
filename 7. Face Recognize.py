@@ -50,3 +50,18 @@ create_train()
 
 # Create recognizer
 face_recog = cv.face.LBPHFaceRecognizer_create()
+
+features = np.array(features, dtype='object')
+labels = np.array(labels)
+
+# Train model
+face_recog.train(features, labels)
+
+# Save numpy features, that allows to us dont repeat all code above
+np.save('features.npy', features)
+np.save('labels.npy', labels)
+
+# We can save pretrained model by using yml-file.
+face_recog.save('face_shaq-vince.yml')
+
+# Let's continue in next script...
